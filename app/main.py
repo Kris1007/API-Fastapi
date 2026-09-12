@@ -42,10 +42,7 @@ app.include_router(vote.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to this amazing API"}
+    return {"message": "Hi Everyone! Welcome to this amazing API"}
 
 
-
-
-# 12:54 minutes
                  
