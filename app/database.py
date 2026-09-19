@@ -29,15 +29,14 @@ def get_db():
 
 # To use traditional SQL to connect a db
 
-while True:
-
-    try:
-        conn = psycopg2.connect(host=settings.database_hostname, database=settings.database_name, user=settings.database_username, password=settings.database_password,
-        cursor_factory=RealDictCursor)
-        cursor = conn.cursor() # to execute sql statements
-        print("Database connection was successful")
-        break
-    except Exception as error:
-        print("Connecting to database failed")
-        print("Error: ", error)
-        time.sleep(2)
+# while True:
+#     try:
+#         conn = psycopg2.connect(host=settings.database_hostname, database=settings.database_name, user=settings.database_username, password=settings.database_password,
+#         cursor_factory=RealDictCursor)
+#         cursor = conn.cursor() # to execute sql statements
+#         print("Database connection was successful")
+#         break
+#     except Exception as error:
+#         print("Connecting to database failed")
+#         print("Error: ", error)
+#         time.sleep(2)
