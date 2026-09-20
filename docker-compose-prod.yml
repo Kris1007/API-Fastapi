@@ -8,7 +8,7 @@ services:
         - postgres
     ports:
       # - <port on localhost>:<port on container>
-      - 80:8000
+      - "127.0.0.1:8000:8000"
     
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000 # changes commands from dockerfile
 
@@ -24,9 +24,13 @@ services:
 
   postgres:
     image: postgres
+    restart: always
     environment:
+        - POSTGRES_USER=${DATABASE_USERNAME}
         - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
         - POSTGRES_DB=${DATABASE_NAME}
+    ports:
+        - "5432:5432"
       
 
     volumes:

@@ -9,7 +9,7 @@ on:
       - "main"
   
 jobs:
-  job1:
+  build:
     environment:
       name: testing #CI/CD
     env:
@@ -81,3 +81,26 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build] # so that build job runs before and both don't run side by side
+    environment:
+      name: production
+    steps:
+      - name: deploying to Ubuntu
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.PROD_HOST}}
+          username: ${{secrets.PROD_USERNAME}}
+          password: ${{secrets.PROD_PASSWORD}}
+          script: |
+            cd ~/app/src
+            git pull
+            echo ${{ secrets.PROD_PASSWORD }} | sudo -S docker compose -f docker-compose-prod.yml pull
+            echo ${{ secrets.PROD_PASSWORD }} | sudo -S docker compose -f docker-compose-prod.yml up -d
+
+    # login to our ubuntu server
+    # cd /app/src
+    # git pull
+    # systemctl restart api
