@@ -29,6 +29,8 @@ services:
         - POSTGRES_USER=${DATABASE_USERNAME}
         - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
         - POSTGRES_DB=${DATABASE_NAME}
+    ports:
+        - "127.0.0.1:5432:5432"
       
 
     volumes:
